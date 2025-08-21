@@ -34,18 +34,18 @@ class _LoginFormState extends State<LoginForm> {
 
       setState(() => _isLoading = true);
 
-      final success = await _authService.login(_email, _password);
+      final token = await _authService.login(_email, _password);
 
       setState(() => _isLoading = false);
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            success
-                ? 'Iniciando sesión como $_email'
+            token != null
+                ? 'Login exitoso para $_email'
                 : 'Error en las credenciales',
           ),
-          backgroundColor: success ? AppColors.primary : AppColors.error,
+          backgroundColor: token != null ? AppColors.primary : AppColors.error,
         ),
       );
     }
